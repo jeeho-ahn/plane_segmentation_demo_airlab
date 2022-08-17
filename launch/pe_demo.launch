@@ -1,0 +1,15 @@
+<launch>
+
+    <node name="pcl_pub" pkg="pcl_ros" type="pcd_to_pointcloud" output="screen">
+        <param name="file_name" value="$(find plane_segmentation)/cloud/lab_cloud.pcd"/>
+        <param name="frame_id" value="lab"/>
+        <param name="interval" value="1.0" />
+        <remap from="/cloud_pcd" to="/sample_pcd"/>
+    </node>
+
+
+    <node name="plane_segmentation_demo" pkg="plane_segmentation" type="plane_segmentation" output="screen"/>
+
+    <node pkg="rviz" type="rviz" name="rviz" args="-d $(find plane_segmentation)/rviz/pe_rviz.rviz"/>
+
+</launch>
